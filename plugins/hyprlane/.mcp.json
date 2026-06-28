@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "hyprlane": {
+      "type": "http",
+      "url": "https://mcp.hyprlane.io/mcp"
+    }
+  }
+}

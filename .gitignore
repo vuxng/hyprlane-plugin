@@ -1,0 +1,4 @@
+# OS / editor cruft only — do NOT ignore .mcp.json (it ships with the plugin)
+.DS_Store
+*.swp
+Thumbs.db

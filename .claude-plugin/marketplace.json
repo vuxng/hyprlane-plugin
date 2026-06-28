@@ -1,0 +1,11 @@
+{
+  "name": "hyprlane",
+  "owner": { "name": "Hyprlane" },
+  "plugins": [
+    {
+      "name": "hyprlane",
+      "source": "./plugins/hyprlane",
+      "description": "Operate Hyprlane from Claude Code — domain skills + workflow commands over the Hyprlane MCP server."
+    }
+  ]
+}
