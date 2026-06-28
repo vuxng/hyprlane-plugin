@@ -7,7 +7,8 @@ Run the **hyprlane-dev-workflow** "Finish" step for issue: $ARGUMENTS
 (default: the active issue).
 
 - `comment_issue` a closing note: what changed and how it was verified.
-- `get_team`, then `update_issue` → In Review or Done (team's real state name).
+- `get_team`, then `update_issue` → In Review or Done (status key `in_review` /
+  `done`, not the display name).
 - `add_external_reference` to link the PR / commit / branch.
 - `post_project_update` if the work moved a project. Confirm before closing an
   issue you didn't open.

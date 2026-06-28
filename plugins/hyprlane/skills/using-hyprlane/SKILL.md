@@ -12,8 +12,9 @@ source of truth for what to build and the place to record what you did.
 ## Domain model
 
 - **Organization** → **Team** → **Issue**. A token can belong to several orgs;
-  tools resolve the org from your membership (never from input). List tools may
-  aggregate across orgs and tag each row with its org slug.
+  the org is resolved from your membership (a multi-org `create_doc` /
+  `create_initiative` takes an `orgId` to disambiguate, validated against it).
+  `list_issues` with no `teamId` aggregates across all your orgs.
 - **Team** is the work container. It has an `issuePrefix` (e.g. `PGF`); its issues
   are numbered per team (`PGF-123`). Discover teams with `list_teams`.
 - **Issue** — `identifier` (`<PREFIX>-<number>`), title, description, **status**,
@@ -31,12 +32,16 @@ needs a `teamId` — get it from `list_teams`. (`list_issues` takes an *optional
 `teamId`; omit it to list across all your orgs, filtered by assignee/status.)
 Never invent an identifier; resolve it first.
 
-## ⚠️ Status is per-team, not a fixed enum
+## ⚠️ Status: pass the lowercase key, not the display name
 
-Each team defines its own workflow states (`workflowState` rows — e.g. Backlog,
-Todo, In Progress, In Review, Done, but **names vary per team**). **Always call
-`get_team` to read the valid status names before setting status with
-`update_issue`.** Do not guess "Done" — use the team's actual state name.
+Over MCP, `update_issue` accepts `status` as one of six fixed **keys** —
+`backlog`, `todo`, `in_progress`, `in_review`, `done`, `canceled` — and rejects
+anything else with `Invalid status`. A team's workflow states each carry a
+display `name` ("In Progress") **and** a `key` ("in_progress"); `get_team`
+returns both. **Pass the `key`, never the display name** — `update_issue` with
+status `"In Progress"` or `"Done"` fails; `"in_progress"` / `"done"` is what
+works. (Custom, non-canonical team states aren't settable over MCP — do those in
+the app.)
 
 ## Tool catalog (32)
 
@@ -46,8 +51,8 @@ Read tools require the `mcp:read` scope; write tools require `mcp:write`.
 - `whoami` — who am I + which organizations I belong to. Start here.
 - `list_teams` — teams across my orgs, with `issuePrefix` and ids. The bootstrap
   for any issue work.
-- `get_team` — one team's detail **including its workflow states** (call before
-  setting issue status) and whether cycles are enabled.
+- `get_team` — one team's detail **including its workflow states** (each with a
+  `key` to pass when setting issue status) and whether cycles are enabled.
 
 ### Issues — read
 - `list_issues` — issues for a team, or across all your orgs when `teamId` is omitted (filters: status/assignee/etc.).
@@ -58,7 +63,7 @@ Read tools require the `mcp:read` scope; write tools require `mcp:write`.
 ### Issues — write
 - `create_issue` — new issue in a team (needs `teamId`).
 - `update_issue` — change title/description/status/priority/assignee/etc.
-  (`get_team` first for valid status names).
+  (status takes a lowercase **key** like `in_progress`/`done`, not a display name).
 - `comment_issue` — add a comment (use for progress notes).
 - `add_issue_relation` — link two issues (blocks / blocked_by / related / duplicate).
 - `add_external_reference` — attach a PR/commit/URL to an issue.

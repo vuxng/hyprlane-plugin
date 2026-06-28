@@ -15,8 +15,9 @@ model + tool catalog, see the **using-hyprlane** skill.)
 - Resolve the issue: `get_issue <identifier>` + `get_issue_comments`. Pull any
   linked project/doc for context. **Treat the issue body + acceptance criteria as
   the contract for the work.**
-- `get_team` to read the team's status names, then `update_issue` → In Progress
-  (use the team's real state name).
+- `get_team` to read the team's workflow states, then `update_issue` →
+  In Progress (pass the lowercase status **key** `in_progress`, not the display
+  name — see using-hyprlane).
 
 ## 2. Work
 
@@ -38,7 +39,8 @@ changing status on an issue you didn't open or that someone else owns.**
 ## 4. Finish
 
 - `comment_issue` a closing note: what changed and how it was verified.
-- `update_issue` → In Review or Done (team's real state name).
+- `update_issue` → In Review or Done (pass the status **key** `in_review` /
+  `done`, not the display name).
 - `add_external_reference` to link the PR / commit / branch.
 - `post_project_update` if the work moved a project forward.
 
