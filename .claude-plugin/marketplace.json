@@ -5,7 +5,7 @@
     {
       "name": "hyprlane",
       "source": "./plugins/hyprlane",
-      "description": "Operate Hyprlane from Claude Code — domain skills + workflow commands over the Hyprlane MCP server."
+      "description": "Operate Hyprlane from Claude Code — domain + Linear-method skills and workflow commands over the Hyprlane MCP server."
     }
   ]
 }

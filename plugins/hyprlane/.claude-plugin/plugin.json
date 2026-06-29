@@ -1,7 +1,7 @@
 {
   "name": "hyprlane",
   "version": "0.1.0",
-  "description": "Operate Hyprlane (issues, projects, docs) from Claude Code — domain skills + workflow commands over the Hyprlane MCP server.",
+  "description": "Operate Hyprlane (issues, projects, cycles, initiatives, docs) from Claude Code — domain + Linear-method skills and workflow commands over the Hyprlane MCP server.",
   "author": { "name": "Hyprlane" },
   "homepage": "https://hyprlane.io",
   "keywords": ["hyprlane", "issue-tracker", "project-memory", "mcp"]

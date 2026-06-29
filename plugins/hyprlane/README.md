@@ -1,18 +1,20 @@
 # Hyprlane for Claude Code
 
 Operate [Hyprlane](https://hyprlane.io) — issues, projects, cycles, initiatives,
-and docs — directly from Claude Code. This plugin wires the Hyprlane MCP server
-and teaches Claude Code Hyprlane's domain model and the
-read-context → code → write-progress workflow.
+docs, and resources — directly from Claude Code. This plugin wires the Hyprlane
+MCP server and teaches Claude Code Hyprlane's domain model, the **Linear method**
+it's built on, and the read-context → code → write-progress workflow.
 
 ## What you get
 
-- **MCP server** `hyprlane` (32 tools: 18 read, 14 non-destructive write) at
+- **MCP server** `hyprlane` (61 tools: 19 read, 42 non-destructive write) at
   `https://mcp.hyprlane.io/mcp`.
-- **Skills** — `using-hyprlane` (domain model + tool catalog) and
-  `hyprlane-dev-workflow` (the working loop), auto-loaded when relevant.
+- **Skills** — `using-hyprlane` (domain model + tool catalog), `hyprlane-method`
+  (the Linear method: how to structure, scope, and write work), and
+  `hyprlane-dev-workflow` (the per-issue working loop) — auto-loaded when relevant.
 - **Commands** — `/hyprlane:start`, `/hyprlane:issues`, `/hyprlane:new`,
-  `/hyprlane:sync`, `/hyprlane:done`, `/hyprlane:standup`.
+  `/hyprlane:sync`, `/hyprlane:done`, `/hyprlane:standup`, `/hyprlane:plan`,
+  `/hyprlane:update`.
 
 ## Prerequisites
 
@@ -52,8 +54,8 @@ You should see the `hyprlane` marketplace registered with one plugin.
 ```
 
 (The id is `<plugin>@<marketplace>` — both are named `hyprlane`.) This pulls in
-the `hyprlane` MCP server, the two skills, and the six commands. Restart Claude
-Code if it prompts you to.
+the `hyprlane` MCP server, the three skills, and the eight commands. Restart
+Claude Code if it prompts you to.
 
 ### Step 3 — authenticate (one time)
 
@@ -83,11 +85,14 @@ should return your user and organizations.
 
 ## Everyday use
 
+- `/hyprlane:plan <goal>` — structure a body of work into the right level
+  (initiative / project / issues), the Linear way.
 - `/hyprlane:start <ID>` — pull an issue's context and begin (sets In Progress).
 - `/hyprlane:issues [mine|team|cycle]` — list issues to pick work from.
 - `/hyprlane:new <title>` — capture a bug/TODO found while coding.
 - `/hyprlane:sync` — checkpoint: post a progress comment + status now.
 - `/hyprlane:done [<ID>]` — closing comment, move to Done/In Review, link the PR.
+- `/hyprlane:update [project|initiative]` — post a status update (health + note).
 - `/hyprlane:standup [mine|team]` — a digest from your notifications + activity.
 
 You don't have to use the commands — once installed, Claude Code reads the skills

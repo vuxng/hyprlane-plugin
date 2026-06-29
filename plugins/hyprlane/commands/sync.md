@@ -4,6 +4,8 @@ description: Checkpoint the active Hyprlane issue now — post a progress commen
 
 Run the **hyprlane-dev-workflow** "Checkpoint" step for the active issue:
 
+- Ground the note in the actual change — skim `git diff` / what you did since the
+  last sync; report what happened, not what you intend to do.
 - `comment_issue` a concise progress note (what changed + why).
 - `update_issue` status if it changed (pass the lowercase status **key** — e.g.
   `in_progress` — from `get_team`'s workflow states, not the display name).
